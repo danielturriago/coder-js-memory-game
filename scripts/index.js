@@ -47,9 +47,9 @@ const printUserInfo = (name, year) => {
     localStorage.setItem('name', name);
     localStorage.setItem('year', year);
     localStorage.setItem('currentLevel', 1);
-    setMenu();
+    app.setMenu();
     setTimeout(() => {
-      initiateGame();
+      app.initNewGame();
     }, 5000);
   } else {
   }

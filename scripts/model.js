@@ -1,8 +1,8 @@
 class Card {
-  constructor(item, id) {
+  constructor(item, id, active = true) {
     this.item = item;
     this.id = id;
-    this.active = true;
+    this.active = active;
   }
 
   cardMatched() {
@@ -12,12 +12,13 @@ class Card {
 
 export class Model {
   constructor() {
+    const initiadedGame = JSON.parse(sessionStorage.getItem('itemsToPlay'));
     this.items = ['🦁', '🤖', '😵‍💫', '🤡', '😈', '🐔', '🐷', '💩', '👻', '🙊', '🦄', '🤬'];
     this.levelsToPlay = [1, 2, 3, 4];
-    this.itemsToPlay = JSON.parse(sessionStorage.getItem('itemsToPlay')) || [];
+    this.itemsToPlay = !!initiadedGame ? initiadedGame.map(({item, id, active}) => new Card(item, id, active)) : [];
     this.levelSelected;
-    this.movesMade = 0;
-    this.moves = null;
+    this.movesMade = sessionStorage.getItem('movesMade') || 0;
+    this.moves = sessionStorage.getItem('movesAllowed') || null;
     this.playerLevel = localStorage.getItem('currentLevel') || 1;
   }
 
@@ -40,16 +41,8 @@ export class Model {
     return array.concat(array);
   }
 
-  resetMoves() {
-    this.movesMade = 0;
-  }
-
-  setMoves() {
+  setNewMove() {
     this.movesMade++
-  }
-
-  resetItemsToPlay() {
-    this.itemsToPlay = [];
   }
 
   selectLevel(difficulty) {
@@ -81,14 +74,35 @@ export class Model {
   }
 
   setNewCards(difficulty) {
-    this.resetMoves();
-    this.resetItemsToPlay();
+    this._resetSessionStorage();
+    this._resetMoves();
+    this._resetItemsToPlay();
     this.selectLevel(difficulty);
+  }
+
+  endGame() {
+    this._resetSessionStorage();
+    this._resetMoves();
+    this._resetItemsToPlay();
   }
 
   setItemsToPlayOnStorage() {
     sessionStorage.setItem('itemsToPlay', JSON.stringify(this.itemsToPlay));
+    sessionStorage.setItem('movesMade', this.movesMade);
+    sessionStorage.setItem('movesAllowed', this.moves);
   }
 
+  _resetSessionStorage() {
+    sessionStorage.clear();
+  }
+
+  _resetMoves() {
+    this.movesMade = 0;
+  }
+
+
+  _resetItemsToPlay() {
+    this.itemsToPlay = [];
+  }
 
 }

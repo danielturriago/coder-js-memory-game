@@ -25,10 +25,16 @@ export class View extends EventEmitter {
     this.resultMoves = this.getElement('#resultMoves');
     this.endGameScreen = this.getElement('.end-game-screen');
     this.menuLevels = this.getElement('.levels');
+    this.menuBtn = this.getElement('.menu');
+    this.aside = this.getElement('aside');
 
     this.firstSelection = null;
     this.secondSelection;
     this.timeInterval;
+
+    this.menuBtn.addEventListener('click', () => {
+      this.aside.classList.toggle('show');
+    })
   }
 
   getElement(selector) {
@@ -50,6 +56,7 @@ export class View extends EventEmitter {
 
   resetBoard = () => {
     this.content.innerHTML = '';
+    this._resetTimer();
   }
 
   addCardToBoard = (card) => {
@@ -81,6 +88,10 @@ export class View extends EventEmitter {
       this.secondsLabel.innerHTML = this.pad(totalSeconds % 60);
       this.minutesLabel.innerHTML = this.pad(parseInt(totalSeconds / 60));
     }, 1000);
+  }
+
+  _resetTimer() {
+    clearInterval(this.timeInterval);
   }
 
   setMovesAllowed(moves) {

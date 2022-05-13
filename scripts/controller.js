@@ -29,6 +29,7 @@ export class Controller {
     this.model.itemsToPlay.forEach(item => {
       this.view.addCardToBoard(item);
     });
+    this.view.movesTaken.innerHTML = this.model.movesMade;
     this.view.initTimer();
     this.view.setMovesAllowed(this.model.moves);
   }
@@ -94,15 +95,15 @@ export class Controller {
     }
     this.view.firstSelection = null;
     this.view.secondSelection = null;
-    this.model.setMoves();
+    this.model.setNewMove();
     this.view.movesTaken.innerHTML = this.model.movesMade;
     this.model.setItemsToPlayOnStorage();
     this.checkGameResolution();
   }
 
   checkGameResolution() {
-    if (this.model.itemsToPlay.length === 0) {
-      clearInterval(this.view.timeInterval);
+    if (this.model.itemsToPlay.filter(item => item.active).length === 0) {
+      this.model.endGame();
       this.view.resetBoard();
       this.view.addClass(this.view.content, "hide");
       this.view.addClass(this.view.endGameScreen, "show");
@@ -111,7 +112,7 @@ export class Controller {
       if (+this.model.playerLevel === +this.model.levelSelected) {
         console.log('Paso por aca');
         localStorage.setItem('currentLevel', +this.model.playerLevel + 1);
-        setMenu();
+        this.setMenu();
       }
     }
   }
