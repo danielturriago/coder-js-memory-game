@@ -1,0 +1,43 @@
+@import 'mixins';
+
+#content {
+  @include layout;
+  flex-wrap: wrap;
+  max-width: 640px;
+  margin: 0 auto;
+  &.hide {
+    display: none;
+  }
+}
+
+.end-game-screen {
+  display: none;
+  background-color: var(--main-color);
+  &.show {
+    @include layout;
+    flex-direction: column;
+  }
+  h2 {
+    @include title;
+  }
+  .end-game-menu {
+    display: flex;
+    padding: 20px 0;
+    >div {
+      padding: 0 10px;
+      p {
+        font-size: 24px;
+        color: var(--white);
+        span {
+          color: var(--black);
+        }
+      }
+    }
+  }
+  .end-game-actions {
+    button {
+      @include main-button;
+      margin: 0 10px;
+    }
+  }
+}
