@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Memory Game</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles/index.css">
+</head>
+<body>
+  <div class="init-page">
+
+    <form id="user-form" action="">
+      <div class="form-box"> 
+        <label for="name">Tu Nombre</label>
+        <input id="name" type="text">
+      </div>
+
+      <div class="form-box">
+        <label for="year">Año en el que naciste</label>
+        <input id="year" type="number">
+      </div>
+
+      <input class="send-btn" id="submit" type="submit" value="Enviar">
+    </form>
+
+    <div id="user-greet">
+    </div>
+
+
+    <div class="main-menu hide">
+      <h2 class="greet"></h2>
+      <div>
+        <button id="new-game">Nuevo Juego</button>
+        <button id="continue-game">Continuar</button>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="main-content">
+    <nav>
+      <div class="moves">
+        <span id="moves-taken">0</span>/<span id="moves-allowed"></span>
+      </div>
+      <div class="time">
+        <span id="minutes">00</span>:<span id="seconds">00</span>
+      </div>
+      <div class="menu">M</div>
+    </nav>
+
+    <aside>
+      <ul class="levels">
+      </ul>
+    </aside>
+
+    <div id="content"></div>
+
+    <div class="end-game-screen">
+      <h2>¡Felicitaciones!</h2>
+      <div class="end-game-menu">
+        <div>
+          <p class="label">Tiempo: <span id="resultTime"></span></p>
+        </div>
+        <div>
+          <p class="label">Movimientos: <span id="resultMoves"></span></p>
+        </div>
+      </div>
+      <div class="end-game-actions">
+        <button id="reset-level">Reiniciar</button>
+        <button id="next-level">Seguiente Nivel</button>
+      </div>
+    </div>
+  </div>
+  
+  <script src="menu.js"></script>
+  <script type="module" src="scripts/index.js"></script>
+</body>
+</html>

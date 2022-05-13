@@ -1,0 +1,47 @@
+@import 'mixins';
+
+#user-form {
+  display: flex;
+  flex-direction: column;
+  width: 400px;
+  .form-box {
+    display: flex;
+    flex-direction: column;
+    padding: 10px 0;
+    label {
+      color: white;
+      font-size: 32px;
+    }
+    input {
+      @include main-input;
+    }
+  }
+  .send-btn {
+    @include main-button;
+  }
+}
+
+.main-menu {
+  text-align: center;
+  display: block;
+  &.hide {
+    display: none;
+  }
+  h2 {
+    @include title;
+  }
+  button {
+    @include main-button;
+    margin: 0 10px;
+  }
+}
+
+#user-greet {
+  display: none;
+  text-align: center;
+  max-width: 600px;
+  p {
+    font-size: 32px;
+    color: white;
+  }
+}
